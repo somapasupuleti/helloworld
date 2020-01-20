@@ -1,1 +1,1 @@
-bat 'Hello World'
+sh 'Hello World'
