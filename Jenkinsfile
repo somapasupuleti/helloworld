@@ -8,7 +8,7 @@ pipeline {
                     bat 'mvn clean compile'
                 }
         }
-        stage ('Testing Stage') {
+        stage ('Unit Testing Stage') {
 
             steps {
                 
