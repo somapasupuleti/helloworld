@@ -16,18 +16,19 @@ pipeline {
                 
             }
         }
-        stage ('Install Stage') {
+        stage ('Deployment Stage') {
             steps {
                 
                     bat 'mvn install'
                 
             }
         }
-		stage ('Sonar Analysis') {
-			steps {
+	stage ('Sonar Analysis') {
+	    steps {
 					
 		    bat 'mvn sonar:sonar'
-			}
-		}
+		    
+	    }
 	}
+   }
 }
