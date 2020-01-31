@@ -26,8 +26,7 @@ pipeline {
 	stage ('Sonar Analysis') {
 	    when {
 	    branch 'master'
-	    }
-	      steps {
+	    }	      steps {
 		    bat 'mvn sonar:sonar'
           }
 	   	}
