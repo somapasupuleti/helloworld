@@ -16,11 +16,22 @@ pipeline {
                bat 'mvn install'
             }
         }
-	    stage ('Sonar Analysis') {
-			when { not { branch "master" } }
-			steps {
-				bat 'mvn sonar:sonar'
-			}
-	   	}
+		 stages {
+          stage("SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('sonar') {
+                bat 'mvn sonar:sonar'
+              }
+            }
+          }
+          stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+        }
    }
 }
