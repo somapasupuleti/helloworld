@@ -1,6 +1,7 @@
 pipeline {
     agent any
 	stages {
+		env.UNIX = isUnix()
 		stage ('Compile Stage') {
 			steps {
 			   bat 'mvn clean compile'
@@ -20,7 +21,7 @@ pipeline {
 		agent any
 		steps {
 		  withSonarQubeEnv('sonar') {
-			bat 'mvn clean package sonar:sonar'
+			executeSonar()
 		  }
 		}
 	  }
@@ -32,4 +33,18 @@ pipeline {
 		}
 	  }       
 	}
+}
+
+
+def executeSonar() {
+    executeCommand('mvn clean package sonar:sonar')
+}
+
+def executeCommand(cmd) {
+    if (Boolean.valueOf(env.UNIX)) {
+        sh cmd
+    }
+    else {
+        bat cmd
+   }
 }
