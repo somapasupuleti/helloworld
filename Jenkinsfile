@@ -1,3 +1,5 @@
+@Library('jenkins-library-test')_
+
 pipeline {
     agent any
 	environment {
@@ -6,17 +8,18 @@ pipeline {
 	stages {
 		stage ('Compile Stage') {
 			steps {
-			   bat 'mvn clean compile'
+			   checkStatus()
+			   executeCommand('mvn clean compile')
 			}
 		}
 		stage ('Unit Testing Stage') {
 			steps {
-			   bat 'mvn test'
+			   executeCommand('mvn test')
 			}
 		}
 		stage ('Deployment Stage') {
 			steps { 
-			   bat 'mvn install'
+			   executeCommand('mvn install')
 			}
 		}		 
 	  stage("SonarQube analysis") {
