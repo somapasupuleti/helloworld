@@ -1,9 +1,9 @@
 pipeline {
     agent any
 	stages {
-		env.UNIX = isUnix()
 		stage ('Compile Stage') {
 			steps {
+			   env.UNIX = isUnix()
 			   bat 'mvn clean compile'
 			}
 		}
