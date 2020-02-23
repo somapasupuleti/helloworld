@@ -10,8 +10,6 @@ pipeline {
 	stages {
 		stage ('Compile Stage') {
 			steps {
-			   Sample sample = new Sample(1, 3)
-			   sample.toString()
 			   checkStatus()
 			   executeCommand('mvn clean compile')
 			}
@@ -50,6 +48,8 @@ def executeSonar() {
 }
 
 def executeCommand(cmd) {
+	Sample sample = new Sample(1, 3)
+	sample.toString()
     if (Boolean.valueOf(env.UNIX)) {
         sh cmd
     }
