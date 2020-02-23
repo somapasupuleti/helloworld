@@ -1,5 +1,7 @@
 @Library('jenkins-library-test')_
 
+import Sample
+
 pipeline {
     agent any
 	environment {
@@ -8,6 +10,8 @@ pipeline {
 	stages {
 		stage ('Compile Stage') {
 			steps {
+			   Sample sample = new Sample(1, 3)
+			   sample.toString()
 			   checkStatus()
 			   executeCommand('mvn clean compile')
 			}
